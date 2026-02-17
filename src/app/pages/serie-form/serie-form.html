@@ -1,0 +1,53 @@
+<section class="container">
+  <h2>Nueva serie</h2>
+
+  <form class="card" [formGroup]="form" (ngSubmit)="save()">
+
+    <label>
+      Título
+      <input type="text" formControlName="title" placeholder="Ej: The Office" />
+    </label>
+    @if (form.controls.title.touched && form.controls.title.invalid) {
+      <small class="error">
+        @if (form.controls.title.errors?.['required']) { El título es obligatorio. }
+        @if (form.controls.title.errors?.['minlength']) { Mínimo 3 caracteres. }
+      </small>
+    }
+
+    <label>
+      Canal
+      <input type="text" formControlName="channel" placeholder="Ej: Netflix" />
+    </label>
+    @if (form.controls.channel.touched && form.controls.channel.invalid) {
+      <small class="error">El canal es obligatorio.</small>
+    }
+
+    <label>
+      Rating (0 a 10)
+      <input type="number" formControlName="rating" min="0" max="10" step="0.1" />
+    </label>
+    @if (form.controls.rating.touched && form.controls.rating.invalid) {
+      <small class="error">
+        @if (form.controls.rating.errors?.['required']) { El rating es obligatorio. }
+        @if (form.controls.rating.errors?.['min']) { Mínimo 0. }
+        @if (form.controls.rating.errors?.['max']) { Máximo 10. }
+      </small>
+    }
+
+    <button type="submit" [disabled]="form.invalid || submitting">
+      @if (submitting) { Enviando... } @else { Crear }
+    </button>
+
+    <a routerLink="/home" class="link">Volver al listado</a>
+
+    @if (errorMsg) {
+      <p class="error-block">{{ errorMsg }}</p>
+    }
+
+    @if (createdId) {
+      <p class="ok">Serie creada con id: {{ createdId }}</p>
+    }
+
+  </form>
+</section>
+

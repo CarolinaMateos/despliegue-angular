@@ -1,0 +1,39 @@
+<section>
+  <h2>Listado de series</h2>
+
+  @if (series$ | async; as series) {
+
+    <div class="series-grid">
+
+      @for (s of series; track s.id) {
+
+        <div class="series-card">
+
+          <img
+            class="series-image"
+            [src]="s.image"
+            [alt]="s.title"
+          />
+
+          <div class="series-info">
+            <h3>{{ s.title }}</h3>
+            <p><strong>Canal:</strong> {{ s.channel }}</p>
+            <p><strong>Creador:</strong> {{ s.creator }}</p>
+            <p><strong>Rating:</strong> {{ s.rating }}</p>
+            <p><strong>Fechas:</strong> {{ s.dates }}</p>
+            <div class="series-id">
+              ID: {{ s.id }}
+            </div>
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  } @else {
+    <p class="loading">Cargando series...</p>
+  }
+
+</section>
