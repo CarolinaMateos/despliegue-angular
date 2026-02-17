@@ -1,4 +1,4 @@
-name: Deploy Angular to VPS (Apache)
+name: Deploy Angular to VPS (Apache
 
 on:
   push:
